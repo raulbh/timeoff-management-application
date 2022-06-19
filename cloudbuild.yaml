@@ -37,7 +37,7 @@ steps:
     - |
         cd ./infra
         terraform apply tfplan
-
+  timeout: 2400s
 
 #[End Terraform steps]
 #[Start building the Docker image]
