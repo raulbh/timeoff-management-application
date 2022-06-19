@@ -29,22 +29,34 @@ steps:
         cd ./infra
         terraform plan
 
+- id: 'Executing terraform apply'
+  name: hashicorp/terraform:1.2.3
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+        cd ./infra
+        terraform apply
+
 #[End Terraform steps]
 #[Start building the Docker image]
 # This step builds the container image.
-- id: 'Build the container image'
-  name: 'gcr.io/cloud-builders/docker'
-  args:
-  - 'build'
-  - '-t'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repo:$SHORT_SHA'
-  - '.'
+# - id: 'Build the container image'
+#   name: 'gcr.io/cloud-builders/docker'
+#   args:
+#   - 'build'
+#   - '-t'
+#   - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME:$SHORT_SHA'
+#   - '.'
 
-- id: 'ls image'
-  name: 'gcr.io/cloud-builders/docker'
-  args:
-  - 'image'
-  - 'ls'
+# - id: 'ls image'
+#   name: 'gcr.io/cloud-builders/docker'
+#   args:
+#   - 'image'
+#   - 'ls'
 
 #[End building the image]
 #[Taging and pushing the image]
+substitutions:
+  _REPO_NAME: my-repo
+  _IMAGE_NAME: timeoff
