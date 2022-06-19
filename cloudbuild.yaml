@@ -29,18 +29,25 @@ steps:
         cd ./infra
         terraform plan -out=tfplan
 
-- id: 'Executing terraform apply'
-  name: hashicorp/terraform:1.2.3
-  entrypoint: 'sh'
-  args:
-    - '-c'
-    - |
         if [ -f "./tfplan"]; then
           cd ./infra
           terraform apply tfplan
         else
           terraform plan || exit 1
         fi
+
+# - id: 'Executing terraform apply'
+#   name: hashicorp/terraform:1.2.3
+#   entrypoint: 'sh'
+#   args:
+#     - '-c'
+#     - |
+#         if [ -f "./tfplan"]; then
+#           cd ./infra
+#           terraform apply tfplan
+#         else
+#           terraform plan || exit 1
+#         fi
 
 #[End Terraform steps]
 #[Start building the Docker image]
