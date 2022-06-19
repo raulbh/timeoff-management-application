@@ -29,7 +29,7 @@ steps:
         cd ./infra
         terraform plan -out=tfplan
 
-- id: 'Executing terraform apply'
+- id: 'Executing_terraform_apply'
   name: hashicorp/terraform:1.2.3
   entrypoint: 'sh'
   args:
@@ -44,7 +44,7 @@ steps:
 # This step builds the container image.
 - id: 'Build the container image'
   name: 'gcr.io/cloud-builders/docker'
-  waitFor: ['Executing_terraform_plan']
+  waitFor: ['Executing_terraform_apply']
   args:
   - 'build'
   - '-t'
