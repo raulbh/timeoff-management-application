@@ -40,8 +40,9 @@ steps:
   timeout: 2400s
 
 #[End Terraform steps]
-#[Start building the Docker image]
-# This step builds the container image.
+#[Start building the Docker image and pushing]
+# This step builds the container image and tag the image $PROJECT_ID and SHORT_SHA
+# are replaced by Cloudbuild default substitutions.
 - id: 'Build the container image'
   name: 'gcr.io/cloud-builders/docker'
   waitFor: ['Executing_terraform_apply']
@@ -50,14 +51,13 @@ steps:
   - '-t'
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
   - '.'
-
-- id: 'ls image'
+# This step pushes the image to container registry.
+- id: 'Pushing the image to container registry'
   name: 'gcr.io/cloud-builders/docker'
   args:
-  - 'image'
-  - 'ls'
+  - 'push'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
 
-#[End building the image]
-#[Taging and pushing the image]
+#[Ends taging and pushing the image]
 substitutions:
   _REGISTRY: gcp-repo
