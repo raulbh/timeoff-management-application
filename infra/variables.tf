@@ -16,3 +16,14 @@ variable "repository_id" {
     default = "gcp-repo"
   
 }
+variable "cluster_secondary_range_name" {
+    description = "Secondary range name for the subnetwork"
+    type = string
+    default = "pod-cidr-range"
+}
+
+variable "services_secondary_range_name" {
+    description = "Services range name for the subnetwork"
+    type = string
+    default = "service-cidr-range"
+}

@@ -14,13 +14,4 @@ resource "google_compute_subnetwork" "gke-subnet" {
     region = var.region
     network = google_compute_network.gke-vpc.name
     ip_cidr_range = "10.128.0.0/24"
-    secondary_ip_range {
-        ip_cidr_range = "10.9.0.0/20"
-        range_name = "us-central1-01"
-    }
-    secondary_ip_range {
-        ip_cidr_range = "10.10.0.0/20"
-        range_name = "us-central1-02"
-    }
-
 }

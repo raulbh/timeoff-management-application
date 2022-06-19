@@ -59,19 +59,19 @@ steps:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
 
 #[Ends taging and pushing the image]
-- id: 'Installing nginx ingress controller'
-  name: 'gcr.io/cloud-builders/kubectl'
-  entrypoint: 'bash'
-  args:
-    - '-c'
-    - |
-      #!/bin/bash
-      
-      gcloud container clusters get-credentials $PROJECT_ID-my-cluster --zone $_GKE_LOCATION
-      kubectl create clusterrolebinding cluster-admin-binding \
-      --clusterrole cluster-admin \
-      --user $(gcloud config get-value account)
-      kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+# - id: 'Installing nginx ingress controller'
+#   name: 'gcr.io/cloud-builders/kubectl'
+#   entrypoint: 'bash'
+#   args:
+#     - '-c'
+#     - |
+#       #!/bin/bash
+
+#       gcloud container clusters get-credentials $PROJECT_ID-my-cluster --zone $_GKE_LOCATION
+#       kubectl create clusterrolebinding cluster-admin-binding \
+#       --clusterrole cluster-admin \
+#       --user $(gcloud config get-value account)
+#       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
 
 substitutions:
   _REGISTRY: gcp-repo
