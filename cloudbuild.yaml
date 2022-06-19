@@ -48,7 +48,7 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REGISTRY_NAME/timeoff:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REGISTRY/timeoff:$SHORT_SHA'
   - '.'
 
 - id: 'ls image'
@@ -60,4 +60,4 @@ steps:
 #[End building the image]
 #[Taging and pushing the image]
 substitutions:
-  _REGISTRY_NAME: gcp-repo
+  _REGISTRY: gcp-repo
