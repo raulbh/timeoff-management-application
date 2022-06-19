@@ -4,7 +4,7 @@ steps:
   name: alpine
   entrypoint: 'sh'
   args:
-    - "-c"
+    - '-c'
     - |
         echo "########################"
         echo "$BRANCH_NAME"
