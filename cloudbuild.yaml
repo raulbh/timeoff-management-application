@@ -27,7 +27,7 @@ steps:
     - '-c'
     - |
         cd ./infra
-        terraform plan
+        terraform plan -out=tfplan
 
 - id: 'Executing terraform apply'
   name: hashicorp/terraform:1.2.3
@@ -35,8 +35,12 @@ steps:
   args:
     - '-c'
     - |
-        cd ./infra
-        terraform apply -auto-aprove
+        if [ -f "./tfplan"]; then
+          cd ./infra
+          terraform apply tfplan
+        else
+          terraform plan || exit 1
+        fi
 
 #[End Terraform steps]
 #[Start building the Docker image]
