@@ -28,6 +28,7 @@ steps:
     - |
         cd ./infra
         terraform plan -out=tfplan
+        &&
         if [ -f "./tfplan"]; then
           echo "Applying terraform plan"
           terraform apply tfplan
