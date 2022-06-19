@@ -48,7 +48,7 @@ steps:
   args:
   - 'build'
   - '-t'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$NAME_IMAGE:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/timeoff:$SHORT_SHA'
   - '.'
 
 - id: 'ls image'
@@ -61,4 +61,3 @@ steps:
 #[Taging and pushing the image]
 substitutions:
   _REPO_NAME: gcp-repo
-  _NAME_IMAGE: timeoff
