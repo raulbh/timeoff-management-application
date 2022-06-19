@@ -36,14 +36,8 @@ steps:
     - '-c'
     - |
         cd ./infra
+        terraform apply tfplan
 
-        if [ -f "./tfplan"]; then
-          echo "Applying terraform plan"
-          terraform apply tfplan
-        else
-          echo "Terraform plan not found"
-          terraform plan || exit 1
-        fi
 
 #[End Terraform steps]
 #[Start building the Docker image]
