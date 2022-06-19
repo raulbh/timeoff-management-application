@@ -36,8 +36,7 @@ steps:
     - '-c'
     - |
         cd ./infra
-        terraform destroy
-#        terraform apply tfplan
+        terraform apply tfplan
   timeout: 2400s
 
 #[End Terraform steps]
