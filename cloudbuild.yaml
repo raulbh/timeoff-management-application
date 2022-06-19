@@ -1,7 +1,7 @@
 # [Start Cloudbuild]
 steps:
-- id "Show branch name"
-  name: 'alpine'
+- id: 'Show branch name'
+  name: alpine
   entrypoint: 'sh'
   args:
     - "-c"
