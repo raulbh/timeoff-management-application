@@ -1,4 +1,5 @@
 # [Start Cloudbuild]
+# [Start Terraform steps init, plan, apply]
 steps:
 - id: 'Show branch name'
   name: alpine
@@ -27,3 +28,23 @@ steps:
     - |
         cd ./infra
         terraform plan
+
+#[End Terraform steps]
+#[Start building the Docker image]
+# This step builds the container image.
+- id: 'Build the container image'
+  name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '-t'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repo:$SHORT_SHA'
+  - '.'
+
+- id: 'ls image'
+  name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'image'
+  - 'ls'
+
+#[End building the image]
+#[Taging and pushing the image]
