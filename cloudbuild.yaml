@@ -28,7 +28,15 @@ steps:
     - |
         cd ./infra
         terraform plan -out=tfplan
-        &&
+
+- id: 'Executing terraform apply'
+  name: hashicorp/terraform:1.2.3
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+        cd ./infra
+
         if [ -f "./tfplan"]; then
           echo "Applying terraform plan"
           terraform apply tfplan
@@ -36,19 +44,6 @@ steps:
           echo "Terraform plan not found"
           terraform plan || exit 1
         fi
-
-# - id: 'Executing terraform apply'
-#   name: hashicorp/terraform:1.2.3
-#   entrypoint: 'sh'
-#   args:
-#     - '-c'
-#     - |
-#         if [ -f "./tfplan"]; then
-#           cd ./infra
-#           terraform apply tfplan
-#         else
-#           terraform plan || exit 1
-#         fi
 
 #[End Terraform steps]
 #[Start building the Docker image]
