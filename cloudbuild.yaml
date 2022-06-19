@@ -9,3 +9,11 @@ steps:
         echo "########################"
         echo "$BRANCH_NAME"
         echo "#########################"
+- id: 'Executing terraform init'
+  name: hashicorp/terraform:1.2.3
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+        cd ./infra
+        terraform init
