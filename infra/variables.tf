@@ -8,11 +8,11 @@ variable "region" {
 
 variable "gke_num_nodes" {
     description = "number of nodes"
-    default = 2
+    default = 1
 }
 
 variable "repository_id" {
     description = "Artifact repository"
-    default = "my-repo"
+    default = "gcp-repo"
   
 }

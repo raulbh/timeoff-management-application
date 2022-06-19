@@ -23,6 +23,6 @@ output "kubernetes_cluster_host" {
 
 output "artifact_repository" {
     description = "Artifact repository"
-    value = google_artifact_registry_repository.my_repo.name
+    value = google_artifact_registry_repository.gcp_repo.name
   
 }

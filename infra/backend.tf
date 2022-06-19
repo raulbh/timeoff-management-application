@@ -3,6 +3,6 @@
 terraform {
     backend "gcs" {
         bucket = "project-01-raulbh-tfstate"
-        prefix = "infra"
+        prefix = "gke-infra"
     }
 }

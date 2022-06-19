@@ -1,4 +1,4 @@
-resource "google_artifact_registry_repository" "my_repo" {
+resource "google_artifact_registry_repository" "gcp_repo" {
     provider = google-beta
 
     project = var.project_id
