@@ -66,10 +66,7 @@ steps:
     - '-c'
     - |
       #!/bin/bash
-      gcloud projects add-iam-policy-binding $PROJECT_ID \
-      --member=$(gcloud config get-value account) \
-      --role=roles/container.admin
-
+      
       gcloud container clusters get-credentials $PROJECT_ID-my-cluster --zone $_GKE_LOCATION
       kubectl create clusterrolebinding cluster-admin-binding \
       --clusterrole cluster-admin \
