@@ -94,7 +94,7 @@ steps:
   - '--filename=$_OUTPUT_PATH/expanded/*'
   - '--cluster=$PROJECT_ID-my-cluster'
   - '--location=$_GKE_LOCATION'
-
+## Change the _OUTPUTH_PATH with the GCS previously created in your GCP project
 substitutions:
   _REGISTRY: gcp-repo
   _GKE_LOCATION: us-central1

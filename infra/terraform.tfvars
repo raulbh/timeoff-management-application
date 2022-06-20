@@ -1,2 +1,2 @@
-project_id = "project-01-raulbh"
-region = "us-central1"
+# project_id = "project-01-raulbh"
+# region = "us-central1"

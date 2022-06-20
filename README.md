@@ -92,6 +92,10 @@ npm start
 ```
 Open http://localhost:3000/ in your browser.
 
+### Automated installation in GCP with Cloudbuild pipeline
+
+You can find the instructions [here](https://github.com/raulbh/timeoff-management-application/blob/master/infra/README.md)
+
 ## Run tests
 
 We have quite a wide test coverage, to make sure that the main user paths work as expected.
