@@ -1,9 +1,11 @@
 variable "project_id" {
     description = "project_id"
+    default = "project-01-raulbh" ###replace with your GCP project ID
 }
 
 variable "region" {
     description = "region"
+    default = "us-central1"
 }
 
 variable "gke_num_nodes" {
