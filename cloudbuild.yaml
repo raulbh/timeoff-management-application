@@ -75,7 +75,8 @@ steps:
       --clusterrole cluster-admin \
       --user $(gcloud config get-value account)
       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
-  
+
+# Prepare gke deployment
 - id: 'Preparing the deployment'
   name: 'gcr.io/cloud-builders/gke-deploy'
   waitFor: ['Installing nginx ingress controller']
@@ -85,6 +86,14 @@ steps:
     - '--image=us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
     - '--app=$_K8S_APP_NAME'
     - '--output=$_OUTPUT_PATH'
+# Applying gke deployment
+- id: 'Apply the deployment'
+  name: 'gcr.io/cloud-builders/gke-deploy'
+  args:
+  - 'apply'
+  - '--filename=$_OUTPUT_PATH/expanded/*'
+  - '--cluster=$PROJECT_ID-my-cluster'
+  - '--location=$_GKE_LOCATION'
 
 substitutions:
   _REGISTRY: gcp-repo
