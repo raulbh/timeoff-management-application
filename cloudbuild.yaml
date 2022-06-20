@@ -57,10 +57,12 @@ steps:
   args:
   - 'push'
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
+  timeout: 350s
 
 # [Ends taging and pushing the image]
 - id: 'Installing nginx ingress controller'
   name: 'gcr.io/cloud-builders/kubectl'
+  waitFor: ['Build the container image']
   entrypoint: 'bash'
   args:
     - '-c'
@@ -72,6 +74,7 @@ steps:
       --clusterrole cluster-admin \
       --user $(gcloud config get-value account)
       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
+  
 
 substitutions:
   _REGISTRY: gcp-repo
