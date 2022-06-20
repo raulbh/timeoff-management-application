@@ -56,10 +56,11 @@ steps:
   name: 'gcr.io/cloud-builders/docker'
   args:
   - 'push'
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY/timeoff:$SHORT_SHA'
   timeout: 350s
 
 # [Ends taging and pushing the image]
+#  Installing nginx ingress controller
 - id: 'Installing nginx ingress controller'
   name: 'gcr.io/cloud-builders/kubectl'
   waitFor: ['Build the container image']
@@ -75,7 +76,19 @@ steps:
       --user $(gcloud config get-value account)
       kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
   
+- id: 'Preparing the deployment'
+  name: 'gcr.io/cloud-builders/gke-deploy'
+  waitFor: ['Installing nginx ingress controller']
+  args:
+    - 'prepare'
+    - '--filename=$_K8S_YAML_PATH'
+    - '--image=us-central1-docker.pkg.dev/$PROJECT_ID/gcp-repo/timeoff:$SHORT_SHA'
+    - '--app=$_K8S_APP_NAME'
+    - '--output=$_OUTPUT_PATH'
 
 substitutions:
   _REGISTRY: gcp-repo
   _GKE_LOCATION: us-central1
+  _K8S_YAML_PATH: 'gke-deployment/timeoff-deployment.yaml'
+  _DEPLOYMENT_NAME: 'timeoff-deployment'
+  _OUTPUT_PATH: 'gs://project-01-raulbh-tfstate'

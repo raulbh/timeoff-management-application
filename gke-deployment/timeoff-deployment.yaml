@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: timeoff
-        image: us-central1-docker.pkg.dev/project-01-raulbh/gcp-repo/timeoff:39fdb90
+        image: us-central1-docker.pkg.dev/project-01-raulbh/gcp-repo/timeoff:1df793a
         resources:
           requests:
             memory: "32Mi"
@@ -81,8 +81,8 @@ metadata:
   name: timeoff-ingress
   labels:
     name: timeoff-ingress
-  # annotations:
-  #   kubernetes.io/ingress.class: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
   - http:
