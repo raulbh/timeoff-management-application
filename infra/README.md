@@ -63,7 +63,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 In the folder `infra` modify the following files:
 
 + **`backend.tf`** replace `bucket` with the bucket name created previously
-+ **`variables.tf`** replace `project_id` with your GCP project ID
++ **`terraform.tfvars`** replace `project_id` with your GCP project ID
   
 Change the following substitution variable in the **`cloudbuild.yaml`** file located in the root 
 
