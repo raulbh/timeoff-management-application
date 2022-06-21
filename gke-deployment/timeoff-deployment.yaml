@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: timeoff
-        image: timeoff:latest
+        image: us-central1-docker.pkg.dev/project-01-raulbh/gcp-repo/timeoff:254e41d
         resources:
           requests:
             memory: "32Mi"
